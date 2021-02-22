@@ -1,0 +1,218 @@
+{
+	"info": {
+		"_postman_id": "a346b2ee-c2d0-445c-bd0c-aaa8c0a8dbac",
+		"name": "VaccNowJsabry",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "GetAllBranches",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllAvailableVaccines",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": null
+			},
+			"response": []
+		},
+		{
+			"name": "GetBranchAvailableVaccine",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:7070/availability/branches/101/vaccines"
+			},
+			"response": []
+		},
+		{
+			"name": "GetBranchAvailableTimeSlot",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:7070/availability/branches/{{branchid}}/availabletimeslot"
+			},
+			"response": []
+		},
+		{
+			"name": "scheduleVaccination",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7070/vaccination/schedulevaccination?branchId={{branchid}}&vaccineId={{vaccineId}}&timeSlot={{timeSlot}}&userId={{userId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"vaccination",
+						"schedulevaccination"
+					],
+					"query": [
+						{
+							"key": "branchId",
+							"value": "{{branchid}}",
+							"description": "branch id"
+						},
+						{
+							"key": "vaccineId",
+							"value": "{{vaccineId}}",
+							"description": "vaccineId"
+						},
+						{
+							"key": "timeSlot",
+							"value": "{{timeSlot}}",
+							"description": "timeSlot"
+						},
+						{
+							"key": "userId",
+							"value": "{{userId}}",
+							"description": "userId"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ChoosePaymentMethod",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7070/vaccination/choosepayment?userId={{userId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"vaccination",
+						"choosepayment"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "{{userId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ConfirmScheduleViaEmail",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:7070/vaccination/scheduleconfirmationemail?userId={{userId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "7070",
+					"path": [
+						"vaccination",
+						"scheduleconfirmationemail"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "{{userId}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetBranchAllAppliedVaccination",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllAppliedVaccinationPerDay",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": ""
+			},
+			"response": []
+		},
+		{
+			"name": "GetAllConfirmedVaccinationsBetweenDates",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var moment = require('moment');\r",
+							"pm.environment.set('currentdate', moment().format((\"YYYY-MM-DD\")));\r",
+							"pm.environment.set('startdate', moment().subtract(5, 'd').format((\"YYYY-MM-DD\")));\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:7070/reporting/listallconfirmedvaccination/{{startdate}}/{{currentdate}}"
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "branchid",
+			"value": "101"
+		},
+		{
+			"key": "vaccineId",
+			"value": "1"
+		},
+		{
+			"key": "timeSlot",
+			"value": "10:15AM-10:30AM"
+		},
+		{
+			"key": "userId",
+			"value": "121"
+		}
+	]
+}
